@@ -1,5 +1,7 @@
 # README
 
+Exercices of first part in folder "Exercicios do desafio 1" present in home dir
+
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
