@@ -1,0 +1,37 @@
+header.bg-dark.row.flex.align-items-center style="min-height: 5vh;"
+    div.container.px-2.px-lg-0
+        section.row.flex.justify-contents-between.align-items-center
+            = link_to root_url, {class: "text-light column"} do
+                h3 Sistem
+            article.column-6.d-none.d-block-md
+                nav.row.flex.justify-contents-between.align-items-center
+                    = link_to "Home".upcase,        root_url, {class: "text-light"}
+                    = link_to "Properties".upcase,  properties_url, {class: "text-light"}
+                    / = link_to "About".upcase,       root_url, {class: "text-light"}
+                    - if current_user.nil?
+                        = link_to "Sign up".upcase,     new_user_registration_url, {class: "text-light"}
+                        = link_to "Log in".upcase,      new_user_session_url, {class: "text-light"}
+                    - else
+                        = link_to "Log out".upcase,     destroy_user_session_url, data: { turbo_method: :delete }, class: "text-light"
+            article.column.d-block.d-none-md
+                details.navbar-content
+                    summary Menu
+                    nav.navbar.bg-dark
+                        .navbar-header.row.flex.justify-contents-center.pt-5
+                            h2 Sistem
+                        ul.navbar-items
+                            li.navbar-item.bg-hover-dark
+                                = link_to "Home".upcase,        root_url, {class: "text-light bg-hover-dark"}
+                            li.navbar-item.bg-hover-dark
+                                = link_to "Properties".upcase,  properties_url, {class: "text-light bg-hover-dark"}
+                            / li.navbar-item.bg-hover-dark
+                                = link_to "About".upcase,       root_url, {class: "text-light bg-hover-dark"}
+                            - if current_user.nil?
+                                li.navbar-item.bg-hover-dark
+                                    = link_to "Sign up".upcase,     new_user_registration_url, {class: "text-light bg-hover-dark"}
+                                li.navbar-item.bg-hover-dark
+                                    = link_to "Log in".upcase,      new_user_session_url, {class: "text-light bg-hover-dark"}
+                            - else
+                                li.navbar-item.bg-hover-dark
+                                    = link_to "Log out".upcase,     destroy_user_session_url, data: { turbo_method: :delete }, class: "text-light"
+                        .navbar-footer

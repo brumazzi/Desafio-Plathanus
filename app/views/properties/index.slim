@@ -1,0 +1,26 @@
+- content_for :title, "Properties"
+
+form.content.my-5.row.flex.justify-contents-center action="#{properties_path}"
+    ul.pagination.column-3.rounded
+        li.bg-hover-light.w-90
+            input.input.no-border.text-dark#query name="filter" value="#{params[:filter]}"
+        li.bg-hover-light.w-10
+            button.button.button-light.text-dark.bg-hover-light-darken.w-100.text-center
+                i class="fa-solid fa-magnifying-glass"
+
+.row.flex.justify-contents-center.mt-5
+    section.w-80-xl.w-90-lg.w-100.px-1
+        .row.flex.justify-contents-around
+            - @properties.each do |property|
+                article.card.border.rounded.w-80.w-40-md.w-30-lg.mb-5 style="background-image: url(#{url_for(property.images.first)});"
+                    .card-header.border-bottom.bg-dark
+                        h3 tooltip-text="#{property.title}" layout-tooltip="down" = property.title[0..26]
+                    .card-body.overflow-hidden style="height: 22rem;"
+                        / p.text-justify
+                            - if property.description.length > 104
+                                = "#{property.description[0..101]}..."
+                            - else
+                                = property.description
+                    .card-footer.row.flex.justify-contents-between.bg-dark
+                        span.py-1 tooltip-text="#{property.full_address}" layout-tooltip="top" = property.full_address[0..38]
+                        a.px-1.button.button-light.button-outline href="#{property_path(property)}" Read more...

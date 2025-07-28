@@ -1,0 +1,49 @@
+- content_for :title, "Property - #{@property.try :title}"
+
+- if @property
+    #image-content.column-12.p-5 style="height: 640px; background-image: url(#{url_for(@property.images.first)}); background-position-x: center; background-repeat: no-repeat; background-size: 100% auto;"
+    .row.flex.px-5.mt-5.container size="lg" style="transform: translateY(-12rem);"
+        .w-60.mx-5.p-2.bg-light.rounded.shadow
+            h2#property-title.column-12.bold = @property.title
+            small style="font-weight: 800;" = @property.full_address
+            #property-tags.mt-1 style="height: 2.5rem;"
+                - @property.tags.each do |tag|
+                    - if tag.tooltip.blank?
+                        span.badge.badge-primary.mr-1
+                            i class="#{tag.icon}"
+                            span.ml-1 = tag.name
+                    - else
+                        span.badge.badge-primary.mr-1 tooltip-text="#{tag.tooltip}" layout-tooltip="top"
+                            i class="#{tag.icon}"
+                            span.ml-1 = tag.name
+            h3.mt-4.bold Description
+            p.mt-2.column-12.text-justify = @property.description
+            h3.column-12.bold Images
+            .column-12
+                .row.flex.justify-contents-between
+                    - @property.images.order(id: :desc).limit(3).each do |image|
+                        .w-30.rounded.overflow-hidden
+                            img src="#{url_for(image)}" width="100%"
+        .w-30.bg-light.shadow.p-2.rounded style="height: 19rem;"
+            .border.border-success.row.flex.justify-contents-around.p-2
+                .column-8
+                    .row.flex
+                        .column
+                            i class="fa-solid fa-dollar-sign border border-success text-success text-center pt-2" style="border-radius: 100%; width: 40px; height: 40px;"
+                        .column.ml-2
+                            p.bold.text-success = "Best price in market!"
+                            p.bold = "Contact Us"
+
+                h5.bold.column-4.text-left
+                    = "R$ "
+                    span style="font-weight: 700;" = "#{(@property.price.round(2))}".sub(".", ",")
+                    = "/mo"
+            hr.my-2.border-dark
+            a.button.button-outline.button-dark.w-100.rounded.pt-2 href="#" style="height: 6.2rem;"
+                big
+                    big
+                        i class="fa-brands fa-whatsapp"
+                        span.ml-1.bold WhatsApp
+    .row.flex.px-5.mt-5.container size="lg" style="transform: translateY(-12rem);"
+
+

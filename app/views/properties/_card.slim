@@ -1,0 +1,12 @@
+.card.rounded.border.border-light-darken style="background-image: url(#{url_for(property.images.first)});"
+    .card-header.border-bottom.bg-dark
+        h3 tooltip-text="#{property.title}" layout-tooltip="top" = property.title[0..16]
+    .card-body.overflow-hidden style="height: 7.5rem;"
+        / p.text-justify
+            - if property.description.length > 104
+                = "#{property.description[0..101]}..."
+            - else
+                = property.description
+    .card-footer.row.flex.justify-contents-between.bg-dark
+        span.py-1 tooltip-text="#{property.full_address}" layout-tooltip="left" = property.full_address[0..18]
+        a.px-1.button.button-light.button-outline href="#{property_path(property)}" Read more...

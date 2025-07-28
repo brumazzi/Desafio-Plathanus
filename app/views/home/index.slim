@@ -1,0 +1,47 @@
+- content_for :title, "Home"
+- first = true
+
+section.row.flex.align-items-center.mb-5 style="height: 95vh; background-image: url(/img/background.png); background-image-size: 100%;"
+    div.column-12
+        article.flex-column.row.flex
+            h1.column.text-dark.text-center Find apartments near from you
+            p.column.text-center
+                strong.text-dark Beautiful and furnished apartments nearby, waiting for you. Find the closest one to you now!
+            div.mt-5
+                .row.flex.justify-contents-center
+                    details.dropdown.w-30.bg-light.rounded.px-3 style="height: 64px;"
+                        summary.py-2
+                            h3 Select City
+                        .content.bg-light.rounded style="max-height: 30rem; overflow-y: auto; overflow-x: hidden;"
+                            ul.pagination.row.flex.flex-column.border-0
+                                - @addresses_cities.each do |city|
+                                    li.d-block.bg-hover-light-darken style="float: none;"
+                                        = link_to properties_path(city: city) do
+                                            big.d-inline-block.w-100.text-center.py-2.text-dark = city
+
+section.container
+    h2.mt-5 Recents Properties
+    article.row.flex.my-5
+        div#carousel-news.column-12.carousel style="height: 18.5rem"
+            section.items
+                - @properties_news.each_slice(3) do |properties|
+                    - if first
+                        - first = false
+                        article show=""
+                            section.row.flex.justify-contents-around
+                                - properties.each do |property|
+                                    div.p-1.column-4
+                                        = render "properties/card", property: property
+                    - else
+                        article
+                            section.row.flex.justify-contents-around
+                                - properties.each do |property|
+                                    div.p-1.column-4
+                                        = render "properties/card", property: property
+            / button carousel-action="preview"
+            / button carousel-action="next"
+
+javascript:
+    document.addEventListener("DOMContentLoaded", function(event) {
+        let carousel = new QCarousel(document.getElementById("carousel-news"));
+    });
