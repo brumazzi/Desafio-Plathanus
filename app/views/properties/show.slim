@@ -21,7 +21,7 @@
             h3.column-12.bold Images
             .column-12
                 .row.flex.justify-contents-between
-                    - @property.images.order(id: :desc).limit(3).each do |image|
+                    - @property.images.order(id: :desc).limit(@property.images.count-1).each do |image|
                         .w-30.rounded.overflow-hidden
                             img src="#{url_for(image)}" width="100%"
         .w-30.bg-light.shadow.p-2.rounded style="height: 19rem;"

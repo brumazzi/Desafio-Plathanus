@@ -7,7 +7,8 @@ class Property < ApplicationRecord
   has_many :tags, through: :property_tags
 
   validates :title, presence: true
-  validates :price, numericality: { greater_than_or_equal_to: 0 }
+  validates :description, presence: true
+  validates :price, presence: true, numericality: { greater_than_or_equal_to: 0 }
 
   validate :limit_images
 
@@ -24,7 +25,7 @@ class Property < ApplicationRecord
   end
 
   def limit_images
-    if images.count > 4
+    if images.count > 5 or images.count < 3
       errors.add(:images, "não podem ser mais de 3 imagens")
     end
   end

@@ -5,6 +5,8 @@
 # below each fixture, per the syntax in the comments below
 #
 one:
-  email: "user@gmail.com"
-  encrypted_password: <%= Devise::Encryptor.digest(User, "password") %>
-  full_name: "Test User"
+  coutry: "Brazil"
+  state: "Santa Catarina"
+  uf: "SC"
+  city: "Palhoça"
+  district: "White Stone"

@@ -4,8 +4,8 @@ class PropertiesController < ApplicationController
   def index
     @properties = Property.all
     if params[:city].present?
-      @properties = Property.where(address_id: address_ids)
       address_ids = Address.where(city: params[:city]).pluck(:id)
+      @properties = Property.where(address_id: address_ids)
     end
 
     @properties = @properties.where("LOWER(title) LIKE ? or LOWER(description) LIKE ?", "%#{params[:filter].downcase}%", "%#{params[:filter].downcase}%") if params[:filter].present?
